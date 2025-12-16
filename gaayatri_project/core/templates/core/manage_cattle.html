@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>Manage My Cattle</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+            <h5>Add New Cow</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success w-100">Add Cow</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            {% for cow in cattle_list %}
+            <div class="col-md-6 mb-3">
+                <div class="card p-3 shadow-sm {% if cow.is_sick %}border-danger{% endif %}">
+                    <h5>{{ cow.name }} <span class="badge bg-secondary">{{ cow.tag_number }}</span></h5>
+                    <p>Breed: {{ cow.breed }} | Age: {{ cow.age_years }}</p>
+                    <p>Yield: {{ cow.daily_milk_yield }} L/day</p>
+                    {% if cow.is_sick %}
+                        <p class="text-danger fw-bold">⚠️ Sick - Needs Attention</p>
+                    {% else %}
+                        <p class="text-success">✅ Healthy</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>No cattle added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

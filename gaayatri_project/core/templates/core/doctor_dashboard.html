@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2 class="mb-4">Doctor Dashboard</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-4 bg-white shadow-sm h-100">
+            <h4>📩 My Inbox</h4>
+            <p>View messages from farmers requesting help.</p>
+            <a href="{% url 'inbox' %}" class="btn btn-gaayatri">View Messages</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
